@@ -1,0 +1,34 @@
+To moja funkcja do obliczania dystansu, prêdkoœæi itd. Wywo³ywana jest za ka¿dym razem jak zmieni siê nasza pozycja.
+Accuracy to jest ten parametr, o którym mówi³em, który mówi o dok¹dnoœci odczytu.
+Speed to aktualna prêdkoœæ, jak¹ wskazuje GPS.
+tEnd to aktualny czas, u¿ywam tego do wyznaczenia tego ile czasu minê³o od rozpoczêcia pomiaru.
+elapsedTime to w³aœnie wartoœæ jak¹ zwraca mi funkcja obliczaj¹ca czas pomiêdzy dwoma punktami.
+iterator to moja zmienna pomocnicza, bo pierwsza odczytana lokalizacja jest zapisywana jako lastLocation i dopiero od drugiego odczytu robiê pomiary.
+Jeœli iterator jest równy 0 to wtedy w³aœnie zapisujê pierwsz¹ lokalizacjê jako lastLocation i odczytujê pierwszy czas (tStart). startRepeatingTask to funkcja do timera, który jest wyœwetlany w GUI, to mo¿na zignorowaæ.
+Jeœli iterator > 0 to wtedy rozpoczynam waœciwe obliczenia. Ca³¹ klasê z opisem te¿ wrzuci³em.
+saveData to funkcja zapisuj¹ca wartoœci do zmiennych.
+updateRoutesPointsDB to moja funkcja do zapisu punktu do bazy danych. Ja zapisujê tylko gdy prêdkoœæ jest wiêksza od 0. Zmniejsza to liczbê punktów w bazie i jest troszkê dok³adniej.
+Zapisujê takie wartoœci: routeID (ID trasy), latitude (szerokoœæ geograficzna), longitude (d³ugoœæ geograficzna), elapsedTime (czas od pocz¹tku pomiaru), accuracy (dok³adnoœæ), speed (prêdkoœæ aktualna)
+
+
+public void onLocationChanged(Location location) {
+    double accuracy = location.getAccuracy();
+    double speed = location.getSpeed() * UnitConversions.MS_TO_KMH;
+    long tEnd = System.currentTimeMillis();
+    double elapsedTime = getElapsedTime(tStart, tEnd);
+
+    if(iterator > 0){
+        CalculateTrack calculateTrack = new CalculateTrack(lastLocation, location, elapsedTime, distance);
+        saveData(calculateTrack.getAvgSpeed(), Double.valueOf(speed), calculateTrack.getDistance(), elapsedTime);
+        lastLocation = location;
+    }
+    else {
+        lastLocation = location;
+        tStart = System.currentTimeMillis();
+        startRepeatingTask();
+    }
+    iterator++;
+
+    if (speed > 0)
+        updateRoutesPointsDB(location.getLatitude(), location.getLongitude(), elapsedTime, accuracy, speed);
+}
