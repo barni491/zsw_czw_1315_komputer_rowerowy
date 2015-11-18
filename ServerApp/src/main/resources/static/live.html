@@ -1,0 +1,163 @@
+<head>
+<meta charset="utf-8">
+
+
+</head>
+
+<div ng-controller = "liveController">
+	<h1>Trening na żywo</h1>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel ">
+				<div class="panel-heading">
+					<h3 class="panel-title">Pozycja GPS</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div  class="panel-body">
+					<div id = "map"></div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="col-md-4">
+			<div class="panel ">
+				<div class="panel-heading">
+					<h3 class="panel-title">Aktualna sytuacja</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div  class="panel-body">
+					<table class="table table-hover table-bordered">
+				    	
+				    		<tr>
+				    			<th>Data</th>
+				    			<td>{{trainingDate}}</td>
+				    		</tr>	
+				    		
+				    		<tr>
+				    			<th>Dystans</th>
+				    			<td>{{temperature}} km</td>
+				    		</tr>	
+				    		
+				    		<tr>
+				    			<th>Temperatura</th>
+				    			<td></td>
+				    		</tr>	
+		        
+				        
+	   				 </table>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="row">
+			<button type="button" class="btn btn-primary" ng-click="toggleBpm(freq_data,['Czas','Kadencja'],[0,120])">Kadencja</button>
+			<button type="button" class="btn btn-primary" ng-click="toggleBpm(speed_data,['Czas','Prędkość'],[0,40])">Prędkość </button>
+			<button type="button" class="btn btn-primary" ng-click="toggleBpm(altitude_data,['Czas','Wysokość n.p.n'],[0,400])">Wysokość n.p.m </button>
+			<button type="button" class="btn btn-primary" ng-click="toggleBpm(humidity_data,['Czas','Wilgotność'],[0,80])">Wilgotność </button>
+			<button type="button" class="btn btn-primary" ng-click="toggleBpm(temp_data,['Czas','Temperatura'],[-5,40])">Temperatura </button>
+			
+		</div>
+		
+<!--	<div class="row">
+		<div class="col-md-6" ng-show ="showBpm">
+			<div class="panel ">
+				<div class="panel-heading">
+					<h3 class="panel-title">Kadencja</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div  class="panel-body">
+					<div id ="div_g_kad"> </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="panel ">
+				<div class="panel-heading">
+					<h3 class="panel-title">Prędkość</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div  class="panel-body">
+					<div id ="div_g_speed"> </div>
+				</div>
+			</div>
+		</div>
+		
+	</div>-->
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel ">
+				<div class="panel-heading">
+					<h3 id ="chart_name" class="panel-title" >Wysokość n.p.m</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div  class="panel-body">
+					<div id ="div_g_altitude"> </div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+	</div> 
+	
+	
+	<h1>Warunki pogodowe</h1>
+	<!--  <div class="row">
+		<div class="col-md-6">
+			<div class="panel ">
+				<div class="panel-heading">
+					<h3 class="panel-title">Wilgotność powietrza</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div  class="panel-body">
+					<div id ="div_g"> </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="panel ">
+				<div class="panel-heading">
+					<h3 class="panel-title">Temperatura powietrza</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div  class="panel-body">
+					<div id ="div_g_temp"> </div>
+				</div>
+			</div>
+		</div>
+		
+	</div> -->
+	
+	<div>
+
+
+</div>
+	
+</div>
+
+
+
+<script>
+	$(document).on('click', '.panel-heading span.clickable', function(e){
+	    var $this = $(this);
+		if(!$this.hasClass('panel-collapsed')) {
+			$this.parents('.panel').find('.panel-body').slideUp();
+			$this.addClass('panel-collapsed');
+			$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+		} else {
+			$this.parents('.panel').find('.panel-body').slideDown();
+			$this.removeClass('panel-collapsed');
+			$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+		}
+	})
+	
+	
+	
+	
+	
+	</script>
