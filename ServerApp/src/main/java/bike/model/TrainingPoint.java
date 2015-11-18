@@ -22,19 +22,19 @@ public class TrainingPoint {
 	private long id;
 	
 	private Timestamp time;
-	private float altitude;
+	private Float altitude;
         
 	private String longitude;
 	private String latitude;
-	private float speed;
-	private float bpm;
-	private float temperature;
-	private float humidity;
+	private Float speed;
+	private Float bpm;
+	private Float temperature;
+	private Float humidity;
 	
 	@ManyToOne (fetch=FetchType.EAGER )
     //  @JoinColumn(name="training" )
        //  @JsonIgnore
-        @JsonBackReference
+    @JsonBackReference
 	private Training training;
 
     public Training getTraining() {
@@ -46,8 +46,8 @@ public class TrainingPoint {
     }
 	
 //	Constructors, getters and setters
-	public TrainingPoint(Timestamp time, float altitude, String longitude, String latitude, float speed, float bpm,
-			float temperature, float humidity) {
+	public TrainingPoint(Timestamp time, Float altitude, String longitude, String latitude, Float speed, Float bpm,
+			Float temperature, Float humidity) {
 		super();
 		this.time = time;
 		this.altitude = altitude;
@@ -70,10 +70,10 @@ public class TrainingPoint {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
-	public float getAltitude() {
+	public Float getAltitude() {
 		return altitude;
 	}
-	public void setAltitude(float altitude) {
+	public void setAltitude(Float altitude) {
 		this.altitude = altitude;
 	}
 	public String getLongitude() {
@@ -88,28 +88,28 @@ public class TrainingPoint {
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	public float getSpeed() {
+	public Float getSpeed() {
 		return speed;
 	}
-	public void setSpeed(float speed) {
+	public void setSpeed(Float speed) {
 		this.speed = speed;
 	}
-	public float getBpm() {
+	public Float getBpm() {
 		return bpm;
 	}
-	public void setBpm(float bpm) {
+	public void setBpm(Float bpm) {
 		this.bpm = bpm;
 	}
-	public float getTemperature() {
+	public Float getTemperature() {
 		return temperature;
 	}
-	public void setTemperature(float temperature) {
+	public void setTemperature(Float temperature) {
 		this.temperature = temperature;
 	}
-	public float getHumidity() {
+	public Float getHumidity() {
 		return humidity;
 	}
-	public void setHumidity(float humidity) {
+	public void setHumidity(Float humidity) {
 		this.humidity = humidity;
 	}
 	public long getId() {

@@ -1,5 +1,6 @@
 package bike.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -14,10 +15,11 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 
-@Entity()
+@Entity
 //@NamedEntityGraph(name = "GroupInfo.detail", attributeNodes = @NamedAttributeNode("trainingPoints"))
 @Table(name = "TRAINING")
 public class Training {
@@ -26,13 +28,13 @@ public class Training {
 	private long id;
 	
 	private Timestamp date;
-	private float avgSpeed;
+	private Float avgSpeed;
 	
-	private float totalDistance;
-	private float duration;
-	private int climb;
-	private int downhill;
-	private float avgBpm;
+	private Float totalDistance;
+	private Float duration;
+	private Integer climb;
+	private Integer downhill;
+	private Float avgBpm;
 	
 	@OneToMany(mappedBy="training")
     //    @JsonManagedReference
@@ -40,8 +42,8 @@ public class Training {
 	private Set<TrainingPoint> trainingPoints;
 	
 //	Constructors, getters and setters
-	public Training(Timestamp date, float avgSpeed, float totalDistance, float duration, int climb, int downhill,
-			float avgBpm) {
+	public Training(Timestamp date, Float avgSpeed, Float totalDistance, Float duration, Integer climb, Integer downhill,
+			Float avgBpm) {
 		super();
 		this.date = date;
 		this.avgSpeed = avgSpeed;
@@ -66,42 +68,43 @@ public class Training {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-	public float getAvgSpeed() {
+	public Float getAvgSpeed() {
 		return avgSpeed;
 	}
-	public void setAvgSpeed(float avgSpeed) {
+	public void setAvgSpeed(Float avgSpeed) {
 		this.avgSpeed = avgSpeed;
 	}
-	public float getTotalDistance() {
+	public Float getTotalDistance() {
 		return totalDistance;
 	}
-	public void setTotalDistance(float totalDistance) {
+	public void setTotalDistance(Float totalDistance) {
 		this.totalDistance = totalDistance;
 	}
-	public float getDuration() {
+	public Float getDuration() {
 		return duration;
 	}
-	public void setDuration(float duration) {
+	public void setDuration(Float duration) {
 		this.duration = duration;
 	}
-	public int getClimb() {
+	public Integer getClimb() {
 		return climb;
 	}
-	public void setClimb(int climb) {
+	public void setClimb(Integer climb) {
 		this.climb = climb;
 	}
-	public int getDownhill() {
+	public Integer getDownhill() {
 		return downhill;
 	}
-	public void setDownhill(int downhill) {
+	public void setDownhill(Integer downhill) {
 		this.downhill = downhill;
 	}
-	public float getAvgBpm() {
+	public Float getAvgBpm() {
 		return avgBpm;
 	}
-	public void setAvgBpm(float avgBpm) {
+	public void setAvgBpm(Float avgBpm) {
 		this.avgBpm = avgBpm;
 	}
+	@JsonBackReference
 	public Set<TrainingPoint> getTrainingPoints() {
 		return trainingPoints;
 	}

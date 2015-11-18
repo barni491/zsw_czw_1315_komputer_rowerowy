@@ -39,7 +39,7 @@ public class TrainingController {
         System.out.println("Hello CORS");
        Training training = null;
        try{ 
-       training =  trainingDao.findOne(id);
+    	   training =  trainingDao.findOne(id);
        // return "User added";
        }
        catch (Exception ex){

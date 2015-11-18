@@ -49,16 +49,15 @@ public class TrainingPointController {
        
     }
     
-     @RequestMapping(value = "/trainingPoint/read/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/trainingPoint/read/{id}", method = RequestMethod.GET)
     public @ResponseBody TrainingPoint getTrainingPoint(@PathVariable long id)
     {   
        TrainingPoint trainingPoint = null;
        try{ 
        trainingPoint =  trainingPointDao.findOne(id);
-       // return "User added";
        }
        catch (Exception ex){
-        //   return "Error creating User";
+    	   return null;
        }
        return trainingPoint;
     }
@@ -69,10 +68,9 @@ public class TrainingPointController {
        List<TrainingPoint> trainingPoint = null;
        try{ 
        trainingPoint =  trainingPointDao.findByTrainingId(id);
-       // return "User added";
        }
        catch (Exception ex){
-        //   return "Error creating User";
+    	   return null;
        }
        return trainingPoint;
     }
